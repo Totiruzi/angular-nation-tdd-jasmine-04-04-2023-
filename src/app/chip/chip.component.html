@@ -1,0 +1,43 @@
+<label for="">Enter User Names</label>
+<img
+  [src]="'../../assets/add_icon.png'"
+  style="width: 16px; height: 16px; float: right; cursor: pointer"
+  (click)="addListModal()"
+/>
+<div class="chip-container" minimumChipsError>
+  <form>
+    <ng-container *ngIf="chipService.chips.length > 0">
+      <div
+        class="chip"
+        *ngFor="
+          let chip of chipService.chips;
+          let idx = index;
+          trackBy: trackByMethod
+        "
+      >
+        <span (dblclick)="turnEditModeOn(chip, idx)">{{
+          chip?.label | chipUppercased
+        }}</span>
+        <button (click)="removeChip(idx)">✖️</button>
+        <div *ngIf="editMode && selectedIndex === idx">
+          <input
+            [(ngModel)]="editedChip"
+            [ngModelOptions]="{ standalone: true }"
+          />
+          <button (click)="editChip(idx, editedChip)">✔️</button>
+        </div>
+      </div>
+    </ng-container>
+    <div class="newChip">
+      <input
+        type="text"
+        class="addChipInput"
+        [(ngModel)]="newChip"
+        [ngModelOptions]="{ standalone: true }"
+        [placeholder]="'Add New Chip'"
+        (focus)= "onChangeMode('add')"
+      />
+      <button *ngIf="newChip" (click)="onAddChip()">✔️</button>
+    </div>
+  </form>
+</div>

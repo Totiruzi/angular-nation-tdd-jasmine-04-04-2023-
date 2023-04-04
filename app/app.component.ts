@@ -6,6 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'form-chips';
-  selection = { value: 'test' }
+  title = 'angular-nation-tdd-jasmine';
 }
